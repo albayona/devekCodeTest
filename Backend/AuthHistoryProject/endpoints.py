@@ -43,7 +43,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
     if not db_user or not verify_password(form_data.password, db_user.password):
         raise HTTPException(status_code=400, detail="Invalid email or password")
     access_token = create_access_token({"sub": db_user.email})
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"access_token": access_token, "token_type": "bearer", "user": db_user.email}
 
 @router.post("/groupchats/create/")
 def create_groupchat(groupchat: GroupChatModel, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
@@ -92,3 +92,15 @@ def send_message(groupchat_id: str, message: MessageModel, current_user: User = 
     db.add(new_message)
     db.commit()
     return {"message": "Message sent"}
+
+
+@router.get("/groupchats/{groupchat_id}/messages/")
+def get_groupchat_messages(groupchat_id: str, current_user: User = Depends(get_current_user),
+                           db: Session = Depends(get_db)):
+    group_chat = db.query(GroupChat).filter(GroupChat.name == groupchat_id).first()
+    if not group_chat:
+        raise HTTPException(status_code=404, detail="Group chat not found")
+
+    messages = db.query(Message).filter(Message.groupchat_id == groupchat_id).order_by(Message.date).all()
+    return {"groupchat_id": groupchat_id,
+            "messages": [{"sender": msg.sender, "text": msg.text, "timestamp": msg.date} for msg in messages]}
