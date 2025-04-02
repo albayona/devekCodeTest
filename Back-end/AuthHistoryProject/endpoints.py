@@ -133,6 +133,8 @@ def send_message(groupchat_id: str, message: MessageModel, current_user: User = 
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
+from datetime import datetime
+
 @router.get("/groupchats/{groupchat_id}/messages/")
 def get_group_messages(groupchat_id: str, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     try:
@@ -140,9 +142,20 @@ def get_group_messages(groupchat_id: str, current_user: User = Depends(get_curre
         if not group_chat:
             raise HTTPException(status_code=404, detail="Group chat not found")
 
-        messages = db.query(Message).filter(Message.groupchat_id == groupchat_id).order_by(Message.timestamp).all()
-        return {"groupchat_id": groupchat_id, "messages": messages}
+        messages = db.query(Message).filter(Message.groupchat_id == groupchat_id).order_by(Message.date).all()
+
+        formatted_messages = [
+            {
+                "sender": msg.sender,
+                "text": msg.text,
+                "timestamp": msg.timestamp.strftime("%Y-%m-%d %H:%M:%S")  # Formatting timestamp as string
+            }
+            for msg in messages
+        ]
+
+        return {"groupchat_id": groupchat_id, "messages": formatted_messages}
     except Exception as e:
         print(f"Error in retrieving messages: {e}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
+
 
