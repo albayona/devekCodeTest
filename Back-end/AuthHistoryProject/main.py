@@ -8,6 +8,15 @@ from models import GroupChat, Base
 
 app = FastAPI()
 
+
+app.mount("/static", StaticFiles(directory="devek/build/static"), name="static")
+
+@app.get("/", response_class=HTMLResponse)
+async def serve_index():
+    with open(os.path.join("devek", "build", "index.html")) as f:
+        return HTMLResponse(content=f.read())
+
+
 FUNNY_NAMES = [
     "Cheesy Penguins", "Spicy Unicorns", "Banana Ninjas", "Fluffy Llamas",
     "Dancing Pickles", "Witty Wizards", "Jolly Jellybeans", "Sneaky Tacos",
@@ -38,6 +47,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+
+
 @app.on_event("startup")
 def startup_event():
     """Runs on server start to ensure chat rooms exist."""
