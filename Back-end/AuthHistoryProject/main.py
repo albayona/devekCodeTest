@@ -38,7 +38,6 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000", "http://devek.bayona.s3-website.us-east-2.amazonaws.com"],
     allow_credentials=True,
-    allow_credentials=True,
     allow_methods=["POST", "GET", "OPTIONS", "DELETE", "PUT"],
     allow_headers=[
         "Access-Control-Allow-Headers",
