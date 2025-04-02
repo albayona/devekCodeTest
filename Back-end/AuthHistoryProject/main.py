@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-
+from fastapi.responses import HTMLResponse
 from db import SessionLocal, engine
 from endpoints import router
 from models import GroupChat, Base
