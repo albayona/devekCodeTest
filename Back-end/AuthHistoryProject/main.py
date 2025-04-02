@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from fastapi.responses import HTMLResponse
 from db import SessionLocal, engine
@@ -10,13 +10,6 @@ import os
 
 app = FastAPI()
 
-
-app.mount("/static", StaticFiles(directory="devek/build/static"), name="static")
-
-@app.get("/", response_class=HTMLResponse)
-async def serve_index():
-    with open(os.path.join("devek", "build", "index.html")) as f:
-        return HTMLResponse(content=f.read())
 
 
 FUNNY_NAMES = [
