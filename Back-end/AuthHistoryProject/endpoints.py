@@ -37,13 +37,20 @@ def signup(user: UserSignup, db: Session = Depends(get_db)):
     db.commit()
     return {"message": "User registered successfully"}
 
+
+class LoginData(BaseModel):
+    username: str
+    password: str
+
+
 @router.post("/login/")
-def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    db_user = db.query(User).filter(User.email == form_data.username).first()
-    if not db_user or not verify_password(form_data.password, db_user.password):
+def login(login_data: LoginData, db: Session = Depends(get_db)):
+    db_user = db.query(User).filter(User.email == login_data.username).first()
+    if not db_user or not verify_password(login_data.password, db_user.password):
         raise HTTPException(status_code=400, detail="Invalid email or password")
     access_token = create_access_token({"sub": db_user.email})
     return {"access_token": access_token, "token_type": "bearer", "user": db_user.email}
+
 
 @router.post("/groupchats/create/")
 def create_groupchat(groupchat: GroupChatModel, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
