@@ -32,7 +32,8 @@ def ensure_default_chats():
 # Configure CORS settings
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*",  "http://35.224.130.62",
+    "http://35.224.130.62:80"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
