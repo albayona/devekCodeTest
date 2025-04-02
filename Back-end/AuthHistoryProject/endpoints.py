@@ -148,7 +148,7 @@ def get_group_messages(groupchat_id: str, current_user: User = Depends(get_curre
             {
                 "sender": msg.sender,
                 "text": msg.text,
-                "timestamp": msg.timestamp.strftime("%Y-%m-%d %H:%M:%S")  # Formatting timestamp as string
+                "timestamp": msg.date.strftime("%Y-%m-%d %H:%M:%S")  # Formatting timestamp as string
             }
             for msg in messages
         ]
