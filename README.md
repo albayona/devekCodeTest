@@ -1,63 +1,83 @@
-
-# Chat Application
+Chat Application
 
 This is a real-time chat application hosted on an AWS S3 bucket for front-end deployment, with a FastAPI backend and a WebSocket server handling communication.
 
-## Live Application
+Live Application
 
-You can access the chat app here: [Chat App](http://andresbayonadebek.s3-website.us-east-2.amazonaws.com/)
+You can access the chat app here: Chat App
 
-## Features
+Features
 
-- **User Authentication**: Sign up and log in securely using your email and password.
-- **Group Chat**: Join existing groups and communicate in real-time.
-- **WebSocket Integration**: Instant message updates with a Node.js WebSocket server.
-- **AWS Hosting**: The front-end is deployed using AWS S3 for static hosting.
+User Authentication: Sign up and log in securely using your email and password.
 
-## How to Use
+Group Chat: Join existing groups and communicate in real-time.
 
-1. **Sign Up**
-   - Navigate to `/signup`
-   - Enter your name, email, and password to create an account.
+WebSocket Integration: Instant message updates with a Node.js WebSocket server.
 
-2. **Log In**
-   - Go to `/login`
-   - Use your registered email and password to access the chat platform.
+AWS Hosting: The front-end is deployed using AWS S3 for static hosting.
 
-3. **Join a Group**
-   - Browse the available chat groups.
-   - Select a group to join the conversation.
+How to Use
 
-4. **Start Chatting**
-   - Send and receive messages in real-time with other users in the group.
+Sign Up
 
-## Technology Stack
+Navigate to /signup
 
-- **Front-end**: React (deployed on AWS S3)
-- **Back-end**: FastAPI (handles authentication and data management)
-- **WebSocket Server**: Node.js (manages real-time messaging)
-- **Database**: PostgreSQL (stores user and chat data)
+Enter your name, email, and password to create an account.
 
-## Deployment Details
+Log In
 
-- The front-end is built in `devekCodeTest/Front-end/devek/build` and deployed to AWS S3.
-- The FastAPI backend is located in `devekCodeTest/Back-end/AuthHistoryProject`.
-- The WebSocket server is in `devekCodeTest/Back-end/WebSocketsServer` and runs with `app.js` as the entry point.
+Go to /login
 
-## Future Enhancements
+Use your registered email and password to access the chat platform.
 
-- Private messaging
-- User profile customization
-- Notifications for new messages
-- Improved UI/UX design
+Join a Group
 
-## Contributing
+Browse the available chat groups.
+
+Select a group to join the conversation.
+
+Start Chatting
+
+Send and receive messages in real-time with other users in the group.
+
+Technology Stack
+
+Front-end: React (deployed on AWS S3)
+
+Back-end: FastAPI (handles authentication and data management, deployed on Google Cloud)
+
+WebSocket Server: Node.js with Socket.IO (manages real-time messaging)
+
+Database: SQLAlchemy with a local SQLite database
+
+Authentication: JWT-based authentication for secure login
+
+Deployment Details
+
+The front-end is built in devekCodeTest/Front-end/devek/build and deployed to AWS S3.
+
+The FastAPI backend is located in devekCodeTest/Back-end/AuthHistoryProject and deployed on Google Cloud.
+
+The WebSocket server is in devekCodeTest/Back-end/WebSocketsServer, runs with app.js as the entry point, and is implemented using Socket.IO.
+
+Future Enhancements
+
+Private messaging
+
+User profile customization
+
+Notifications for new messages
+
+Improved UI/UX design
+
+Contributing
 
 If you would like to contribute to this project, feel free to fork the repository and submit pull requests.
 
-## Contact
+Contact
 
 For any issues or support, please reach out to the project owner.
+
 
 
 # Local Setup Guide
