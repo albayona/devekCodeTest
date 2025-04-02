@@ -6,6 +6,7 @@ from db import SessionLocal, engine
 from endpoints import router
 from models import GroupChat, Base
 from fastapi.staticfiles import StaticFiles
+import os
 
 app = FastAPI()
 
