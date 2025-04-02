@@ -10,6 +10,15 @@ import os
 
 app = FastAPI()
 
+# Configure CORS settings
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 FUNNY_NAMES = [
@@ -32,16 +41,6 @@ def ensure_default_chats():
     db.commit()
     db.close()
 
-
-# Configure CORS settings
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*",  "http://35.224.130.62",
-    "http://35.224.130.62:80"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 
 
